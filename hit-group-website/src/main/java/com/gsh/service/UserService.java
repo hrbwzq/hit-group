@@ -1,6 +1,7 @@
 package com.gsh.service;
 
 import com.gsh.domain.AddFriendApply;
+import com.gsh.domain.Chat;
 import com.gsh.domain.User;
 import com.gsh.web.backend.beans.UserPageBean;
 import com.gsh.web.news.beans.NewsReplyFormBean;
@@ -55,7 +56,9 @@ public interface UserService
 	public void addNewsReply(NewsReplyFormBean newsReplyFormBean, Long newsId, Long userId);
 
 	/**
-	 * 更新用户个人信息
+	 * 更新用户个人信息,查询字段为ID或username任意一个,
+	 * 可更新字段包括sex,thumbnail,realName,age,major,
+	 * address,qq,phone
 	 * @param user 包含新的个人信息的用户类
 	 */
 	public void updateUserOptionalInfo(User user);
@@ -94,6 +97,12 @@ public interface UserService
 	 * @param toUserId 被关注的用户
 	 */
 	public void watchUser(Long fromUserId, Long toUserId);
+
+	/**
+	 * 获得所有发来的私信
+	 * @return 包含所有发来的私信的列表，可能为空
+	 */
+	public List<Chat> getAllchats();
 
 	/**
 	 * 充值为会员

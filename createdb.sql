@@ -26,7 +26,7 @@ create table t_user
 	age int,
 	major varchar(255),
 	address varchar(255),
-	email varchar(255),
+	email varchar(255) NOT NULL,
 	qq varchar(255),
 	phone varchar(255),
 	watched int NOT NULL,

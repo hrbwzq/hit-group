@@ -57,6 +57,30 @@ public class NewsDAOImpl extends CommonDAO implements NewsDAO
 	}
 
 	@Override
+	public List<News> queryLimitNewsByCategoryName(String categoryName, int size)
+	{
+		return null;
+	}
+
+	@Override
+	public List<News> queryNewsByPage(String categoryName, int startPage, int pageSize)
+	{
+		return null;
+	}
+
+	@Override
+	public News queryNewsById(Long newdId)
+	{
+		return null;
+	}
+
+	@Override
+	public int queryNewsCountByCategoryName(String categoryName)
+	{
+		return 0;
+	}
+
+	@Override
 	public void addNewsCategory(String newsCategoryName)
 	{
 		NewsCategory newsCategory = new NewsCategory();

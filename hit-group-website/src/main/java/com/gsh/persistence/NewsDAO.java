@@ -22,6 +22,37 @@ public interface NewsDAO
 	public void insertNewsByCategoryId(News news, Long newsCategoryId);
 
 	/**
+	 * 根据时间和新闻类名查询指定条数的新闻
+	 * @param categoryName 新闻类名
+	 * @param size 待查条数
+	 * @return 包含查询结果信息的列表,无结果返回空列表
+	 */
+	public List<News> queryLimitNewsByCategoryName(String categoryName, int size);
+
+	/**
+	 * 根据时间和新闻类名分页查询所有新闻
+	 * @param categoryName 新闻类名
+	 * @param startPage 其实页码
+	 * @param pageSize 分页大小
+	 * @return 包含查询结果信息的列表,无结果返回空列表
+	 */
+	public List<News> queryNewsByPage(String categoryName, int startPage, int pageSize);
+
+	/**
+	 * 通过新闻ID查询新闻
+	 * @param newdId 新闻ID
+	 * @return 新闻对象,如果查询结果为空,返回null
+	 */
+	public News queryNewsById(Long newdId);
+
+	/**
+	 * 根据新闻分类名查询该类新闻条数
+	 * @param categoryName 新闻分类名
+	 * @return 新闻条数
+	 */
+	public int queryNewsCountByCategoryName(String categoryName);
+
+	/**
 	 * 插入一个新闻分类
 	 * @param newsCategoryName 新闻分类名
 	 */

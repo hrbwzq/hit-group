@@ -1,5 +1,6 @@
 package com.gsh.service;
 
+import com.gsh.domain.Chat;
 import com.gsh.web.forum.beans.ChatFormBean;
 
 public interface ChatService
@@ -24,5 +25,10 @@ public interface ChatService
 	 */
 	public void deleteChat(Long chatId);
 
-
+	/**
+	 * 查询特定的私信
+	 * @param chatId 私信ID
+	 * @return 查询得到的私信对象,未查到结果返回值为null
+	 */
+	public Chat querySingleChat(Long chatId);
 }

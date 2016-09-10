@@ -14,7 +14,7 @@ public interface NoticeService
 
 	/**
 	 * 读取当前公告
-	 * @return 当前公告
+	 * @return 当前公告,如果未查询到结果返回null
 	 */
 	public Notice getCurrentNotice();
 }

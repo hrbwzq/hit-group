@@ -1,5 +1,6 @@
 package com.gsh.service;
 
+import com.gsh.domain.Topic;
 import com.gsh.web.forum.beans.TopicFormBean;
 import com.gsh.web.forum.beans.TopicPageBean;
 
@@ -21,10 +22,14 @@ public interface TopicService
 	public void publishTopic(TopicFormBean topicFormBean, Long userId);
 
 	/**
-	 * 删除主题帖
+	 * 通过ID删除主题帖
 	 * @param topicId 主题帖ID
 	 */
 	public void deleteTopicById(Long topicId);
 
-
+	/**
+	 * 删除主题铁
+	 * @param topic 主题帖对象
+	 */
+	public void deleteTopic(Topic topic);
 }
