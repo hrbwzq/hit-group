@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hit-group.iml" filepath="$PROJECT_DIR$/hit-group.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hit-group-crawler/hit-group-crawler.iml" filepath="$PROJECT_DIR$/hit-group-crawler/hit-group-crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hit-group-website/hit-group-website.iml" filepath="$PROJECT_DIR$/hit-group-website/hit-group-website.iml" />
+    </modules>
+  </component>
+</project>

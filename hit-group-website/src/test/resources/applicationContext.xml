@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 业务层和持久层注解扫描-->
+	<context:component-scan base-package="com.gsh.persistence.impl,com.gsh.service.impl"/>
+
+	<!-- Hibernate SessionFactory事务支持-->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<!-- 注解驱动的事务支持-->
+	<tx:annotation-driven transaction-manager="txManager"/>
+
+	<!-- 配置C3P0数据库连接池-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		  destroy-method="close">
+		<!-- 数据库驱动-->
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<!-- 数据库连接URL-->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hit_group"/>
+		<!-- 用户名-->
+		<property name="user" value="root"/>
+		<!-- 密码-->
+		<property name="password" value="102030102030guij"/>
+		<!-- 连接池最小维持连接数-->
+		<property name="minPoolSize" value="10"/>
+		<!-- 连接池最大维持连接数-->
+		<property name="maxPoolSize" value="100"/>
+		<!-- 连接池初始连接数-->
+		<property name="initialPoolSize" value="10"/>
+		<!-- 连接最大空闲时间-->
+		<property name="maxIdleTime" value="300"/>
+		<!-- 数据源已加载预编译SQL语句最大数量-->
+		<property name="maxStatements" value="1000"/>
+		<!-- 空闲连接检查时间间隔-->
+		<property name="idleConnectionTestPeriod" value="60"/>
+		<!--获取新连接失败时的重试次数-->
+		<property name="acquireRetryAttempts" value="30"/>
+	</bean>
+
+	<!-- Hibernate SessionFactory配置 注解驱动-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- 数据源-->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 注解扫描-->
+		<property name="packagesToScan" value="com.gsh.domain"/>
+		<property name="hibernateProperties">
+			<props>
+				<!-- 数据库方言-->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<!-- 数据表生成策略-->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- 控制台输出SQL语句-->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 控制台输出格式化的SQL语句-->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- 开启查询缓存-->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<!-- 开启二级缓存-->
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<!-- 指定ehcache整合提供类-->
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<!-- 测试session来源-->
+				<!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+			</props>
+		</property>
+	</bean>
+
+</beans>
