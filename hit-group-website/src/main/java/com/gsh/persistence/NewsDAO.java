@@ -40,10 +40,10 @@ public interface NewsDAO
 
 	/**
 	 * 通过新闻ID查询新闻
-	 * @param newdId 新闻ID
+	 * @param newsId 新闻ID
 	 * @return 新闻对象,如果查询结果为空,返回null
 	 */
-	public News queryNewsById(Long newdId);
+	public News queryNewsById(Long newsId);
 
 	/**
 	 * 根据新闻分类名查询该类新闻条数

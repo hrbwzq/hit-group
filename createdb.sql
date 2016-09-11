@@ -146,4 +146,8 @@ create table t_friends_validate
 	to_user_id bigint,
 	PRIMARY KEY(id)
 );
-
+insert into t_privilege(privilege) values ('user');
+insert into t_privilege(privilege) values ('administrator');
+insert into t_news_category(category) values ('热点新闻');
+insert into t_news_category(category) values ('热点话题');
+insert into t_news_category(category) values ('热点人物');

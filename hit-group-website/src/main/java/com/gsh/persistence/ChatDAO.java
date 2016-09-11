@@ -16,4 +16,5 @@ public interface ChatDAO
 	 * @return 查询得到的私信对象,如果没有查到结果,返回null
 	 */
 	public Chat getChatById(Long chatId);
+
 }

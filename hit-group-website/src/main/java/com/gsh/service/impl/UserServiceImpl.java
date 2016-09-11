@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Service
+@Service(value = "userService")
 @Transactional
 public class UserServiceImpl extends CommonService implements UserService
 {
@@ -28,6 +28,10 @@ public class UserServiceImpl extends CommonService implements UserService
 		user.setUsername(userRegistFormBean.getUsername());
 		user.setPassword(userRegistFormBean.getPassword());
 		user.setEmail(userRegistFormBean.getEmail());
+
+		//添加普通用户权限
+		Privilege privilege = this.getPrivilegeDAO().getPrivilegeByName("user");
+		user.getPrivileges().add(privilege);
 
 		//保存新的User对象
 		getUserDAO().addUser(user);
@@ -131,48 +135,60 @@ public class UserServiceImpl extends CommonService implements UserService
 	@Override
 	public List<AddFriendApply> getAddFriendApplies(Long userId)
 	{
-		return null;
+		return getFriendApplyDAO().getToUserApply(userId);
 	}
 
 	@Override
 	public void makeAddFriendApply(Long fromUserId, Long toUserId)
 	{
-
+		getFriendApplyDAO().addFriendApply(fromUserId, toUserId);
 	}
 
 	@Override
 	public void acceptAddFriendApply(Long fromUserId, Long toUserId)
 	{
-
+		getFriendApplyDAO().deleteFriendApply(fromUserId, toUserId);
+		User fromUser = getUserDAO().getUserById(fromUserId);
+		User toUser = getUserDAO().getUserById(toUserId);
+		toUser.getFriends().add(fromUser);
+		fromUser.getFriends().add(toUser);
 	}
 
 	@Override
 	public void watchUser(Long fromUserId, Long toUserId)
 	{
-
+		User fromUser = getUserDAO().getUserById(fromUserId);
+		User toUser = getUserDAO().getUserById(toUserId);
+		fromUser.getWatchers().add(toUser);
+		toUser.setWatched(toUser.getWatched() + 1);
 	}
 
 	@Override
-	public List<Chat> getAllchats()
+	public List<Chat> getAllChats(Long userId)
 	{
-		return null;
+		User user = getUserDAO().getUserById(userId);
+		Set<Chat> chatSet = user.getRecievedChats();
+		List<Chat> chatList = new ArrayList<>();
+		chatList.addAll(chatSet);
+		return chatList;
 	}
+
 
 	@Override
 	public void buyMember(Long userId)
 	{
-
+		getUserDAO().getUserById(userId).setMembered(1);
 	}
 
 	@Override
 	public void banUser(Long userId)
 	{
-
+		getUserDAO().getUserById(userId).setBanned(1);
 	}
 
 	@Override
 	public void releaseUser(Long userId)
 	{
-
+		getUserDAO().getUserById(userId).setBanned(0);
 	}
 }

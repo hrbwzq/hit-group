@@ -27,9 +27,4 @@ public interface TopicService
 	 */
 	public void deleteTopicById(Long topicId);
 
-	/**
-	 * 删除主题铁
-	 * @param topic 主题帖对象
-	 */
-	public void deleteTopic(Topic topic);
 }

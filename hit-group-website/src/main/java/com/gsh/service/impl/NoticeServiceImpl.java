@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-@Service
+@Service(value = "noticeService")
 @Transactional
 public class NoticeServiceImpl extends CommonService implements NoticeService
 {

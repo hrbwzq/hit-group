@@ -99,10 +99,11 @@ public interface UserService
 	public void watchUser(Long fromUserId, Long toUserId);
 
 	/**
-	 * 获得所有发来的私信
+	 * 根据用户ID获得所有发来的私信
+	 * @param userId 用户ID
 	 * @return 包含所有发来的私信的列表，可能为空
 	 */
-	public List<Chat> getAllchats();
+	public List<Chat> getAllChats(Long userId);
 
 	/**
 	 * 充值为会员

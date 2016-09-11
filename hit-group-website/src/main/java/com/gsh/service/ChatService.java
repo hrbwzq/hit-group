@@ -3,6 +3,8 @@ package com.gsh.service;
 import com.gsh.domain.Chat;
 import com.gsh.web.forum.beans.ChatFormBean;
 
+import java.util.List;
+
 public interface ChatService
 {
 	/**
@@ -12,6 +14,13 @@ public interface ChatService
 	 * @param toUserId 去向用户ID
 	 */
 	public void makeChat(ChatFormBean chatFormBean, Long fromUserId, Long toUserId);
+
+	/**
+	 * 通过用户ID查询该用户全部已收到的私信
+	 * @param userId 用户ID
+	 * @return 保函查询结果的列表,可能为空列表
+	 */
+	public List<Chat> getRecievedChats(Long userId);
 
 	/**
 	 * 将私信标为已读

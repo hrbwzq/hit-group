@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service(value = "topicService")
 @Transactional
 public class TopicServiceImpl extends CommonService implements TopicService
 {
@@ -45,6 +45,7 @@ public class TopicServiceImpl extends CommonService implements TopicService
 		topic.setUser(user);
 		topic.setCreateTime(new Date());
 		topic.setLastModifiedTime(new Date());
+		topic.setDeleted(0);
 
 		//保存新的主题帖对象
 		getTopicDAO().addTopic(topic);
@@ -57,9 +58,4 @@ public class TopicServiceImpl extends CommonService implements TopicService
 		topic.setDeleted(1);
 	}
 
-	@Override
-	public void deleteTopic(Topic topic)
-	{
-		topic.setDeleted(1);
-	}
 }

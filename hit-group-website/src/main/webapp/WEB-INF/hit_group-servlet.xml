@@ -13,12 +13,9 @@
 	<!-- 注解驱动-->
 	<mvc:annotation-driven />
 	<!-- 静态资源文件夹-->
-	<mvc:resources location="/resources/js/" mapping="/resources/js/**"/>
-	<mvc:resources location="/resources/css/" mapping="/resources/css/**"/>
-	<mvc:resources location="/resources/images/" mapping="/resources/images/**"/>
-	<mvc:resources location="/resources/fonts/" mapping="/resources/fonts/**"/>
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
 	<!-- 控制器所在包-->
-	<context:component-scan base-package="com.gsh.web.controller" />
+	<context:component-scan base-package="com.gsh.web.news.controller" />
 
 	<!-- Velocity视图模板配置-->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

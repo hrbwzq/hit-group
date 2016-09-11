@@ -4,13 +4,17 @@ import com.gsh.domain.Topic;
 import com.gsh.domain.TopicReply;
 import com.gsh.domain.User;
 import com.gsh.service.TopicReplyService;
+import com.gsh.service.util.PageUtil;
+import com.gsh.web.forum.beans.TopicPageBean;
 import com.gsh.web.forum.beans.TopicReplyFormBean;
+import com.gsh.web.forum.beans.TopicReplyPageBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
-@Service
+@Service(value = "topicReplyService")
 @Transactional
 public class TopicReplyServiceImpl extends CommonService implements TopicReplyService
 {
@@ -31,12 +35,15 @@ public class TopicReplyServiceImpl extends CommonService implements TopicReplySe
 			parentTopicReply = getTopicReplyDAO().queryTopicReplyById(parentReplyId);
 		}
 
+		//查询当前主题帖最大楼数
+		int maxFloor = getTopicReplyDAO().getCurrentMaxFloor(topicId);
+
 		//封装新的主题回复帖对象
 		TopicReply topicReply = new TopicReply();
 		topicReply.setDeleted(0);
 		topicReply.setUser(user);
 		topicReply.setContent(topicReplyFormBean.getContent());
-		topicReply.setFloor(topicReplyFormBean.getFloor());
+		topicReply.setFloor(maxFloor + 1);
 		topicReply.setParentTopicReply(parentTopicReply);
 		topicReply.setTopic(topic);
 
@@ -48,15 +55,27 @@ public class TopicReplyServiceImpl extends CommonService implements TopicReplySe
 	}
 
 	@Override
+	public TopicReplyPageBean getTopicReplyByTopicIdByPage(Long topicId, int startPage, int pageSize)
+	{
+		//得到分页总数
+		int queryCount = getTopicReplyDAO().queryTopicReplyCount(topicId);
+		int pageCount = PageUtil.getPageCount(queryCount, pageSize);
+
+		//分页查询
+		List<TopicReply> topicReplyList = this.getTopicReplyDAO().queryTopicReplyByPage(topicId, startPage, pageSize);
+		TopicReplyPageBean topicReplyPageBean = new TopicReplyPageBean();
+		topicReplyPageBean.getTopicReplyList().addAll(topicReplyList);
+		topicReplyPageBean.setTotalPage(pageCount);
+		topicReplyPageBean.setCurrentPage(startPage);
+
+		return topicReplyPageBean;
+	}
+
+	@Override
 	public void deleteTopicReplyById(Long topicReplyId)
 	{
 		TopicReply topicReply = getTopicReplyDAO().queryTopicReplyById(topicReplyId);
 		topicReply.setDeleted(1);
 	}
 
-	@Override
-	public void deleteTopicReply(TopicReply topicReply)
-	{
-		topicReply.setDeleted(1);
-	}
 }

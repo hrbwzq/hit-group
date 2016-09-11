@@ -5,19 +5,17 @@ import com.gsh.domain.NewsCategory;
 import com.gsh.persistence.NewsDAO;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
-@Transactional
+@Repository(value = "newsDAO")
 public class NewsDAOImpl extends CommonDAO implements NewsDAO
 {
 
 	@Override
 	public void insertNewsByCategoryName(News news, String newsCategoryName)
 	{
-		String hql = "from NewsCategory t_news_category where category=:category";
+		String hql = "from NewsCategory newsCategory where category=:category";
 		Query query = this.getSession().createQuery(hql);
 		query.setString("category", newsCategoryName);
 		@SuppressWarnings("unchecked")
@@ -38,7 +36,7 @@ public class NewsDAOImpl extends CommonDAO implements NewsDAO
 	@Override
 	public void insertNewsByCategoryId(News news, Long newsCategoryId)
 	{
-		String hql = "from NewsCategory t_news_category where newsCategoryId=:newsCategoryId";
+		String hql = "from NewsCategory newsCategory where newsCategoryId=:newsCategoryId";
 		Query query = this.getSession().createQuery(hql);
 		query.setLong("newsCategoryId", newsCategoryId);
 		@SuppressWarnings("unchecked")
@@ -59,25 +57,43 @@ public class NewsDAOImpl extends CommonDAO implements NewsDAO
 	@Override
 	public List<News> queryLimitNewsByCategoryName(String categoryName, int size)
 	{
-		return null;
+		String hql = "from News news where news.newsCategory.category=:categoryName order by createTime desc";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("categoryName", categoryName);
+		query.setFirstResult(0);
+		query.setMaxResults(size);
+		@SuppressWarnings("unchecked")
+		List<News> newsList = query.list();
+		return newsList;
 	}
 
 	@Override
 	public List<News> queryNewsByPage(String categoryName, int startPage, int pageSize)
 	{
-		return null;
+		String hql = "from News news where news.newsCategory.category=:categoryName order by createTime desc";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("categoryName", categoryName);
+		query.setFirstResult((startPage - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<News> newsList = query.list();
+		return newsList;
 	}
 
 	@Override
-	public News queryNewsById(Long newdId)
+	public News queryNewsById(Long newsId)
 	{
-		return null;
+		return (News)this.getSession().get(News.class, newsId);
 	}
 
 	@Override
 	public int queryNewsCountByCategoryName(String categoryName)
 	{
-		return 0;
+		String hql = "select count(newsId) from News news where news.newsCategory.category=:categoryName";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("categoryName", categoryName);
+		Long result = (Long)query.uniqueResult();
+		return result.intValue();
 	}
 
 	@Override

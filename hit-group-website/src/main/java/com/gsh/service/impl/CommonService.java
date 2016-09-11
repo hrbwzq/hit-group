@@ -1,24 +1,30 @@
 package com.gsh.service.impl;
 
 import com.gsh.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(value = "commonService")
 public class CommonService
 {
+	@Autowired
 	private ChatDAO chatDAO;
-
+	@Autowired
 	private NewsDAO newsDAO;
-
+	@Autowired
 	private NewsReplyDAO newsReplyDAO;
-
+	@Autowired
 	private NoticeDAO noticeDAO;
-
+	@Autowired
 	private TopicDAO topicDAO;
-
+	@Autowired
 	private TopicReplyDAO topicReplyDAO;
-
+	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private FriendApplyDAO friendApplyDAO;
+	@Autowired
+	private PrivilegeDAO privilegeDAO;
 
 	public ChatDAO getChatDAO()
 	{
@@ -53,5 +59,15 @@ public class CommonService
 	public UserDAO getUserDAO()
 	{
 		return userDAO;
+	}
+
+	public FriendApplyDAO getFriendApplyDAO()
+	{
+		return friendApplyDAO;
+	}
+
+	public PrivilegeDAO getPrivilegeDAO()
+	{
+		return privilegeDAO;
 	}
 }
