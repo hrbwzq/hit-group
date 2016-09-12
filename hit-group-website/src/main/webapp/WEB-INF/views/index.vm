@@ -6,11 +6,13 @@
 	<title>哈工大圈子-首页</title>
 	<link href="resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
 	<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="resources/css/global_style.css" rel="stylesheet" type="text/css"/>
 	<script src="resources/js/jquery-2.1.4.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/index_app/app.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -35,65 +37,84 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="站内搜索">
 					</div>
-					<button type="submit" class="btn btn-default">搜索</button>
+					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> </button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle"
-						   data-toggle="dropdown">加入我们 <span class="caret"></span></a>
+						   data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> $!user.username <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">登陆</a></li>
-							<li><a href="#">注册</a></li>
+							#if($user)
+								<li><a href="logout">退出登陆</a> </li>
+							#else
+								<li><a href="login">登陆</a></li>
+								<li><a href="regist">注册</a></li>
+							#end
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container" style="padding-top: 70px">
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				热点新闻
-			</div>
-			<div class="panel-body">
-				#foreach($title in $hotNews)
-					<table class="table">
-						<tr>
-							<td>$title.title</td>
-						</tr>
-					</table>
-				#end
-			</div>
-		</div>
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="panel panel-default" id="panel_1">
+					<div class="panel-heading">
+						热点新闻
+					</div>
+					<div class="panel-body">
+						#foreach($title in $hotNews)
+							<table class="table">
+								<tr>
+									<td>$title.title</td>
+								</tr>
+							</table>
+						#end
+					</div>
+				</div>
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				热点人物
-			</div>
-			<div class="panel-body">
-				#foreach($title in $hotPeople)
-					<table class="table">
-						<tr>
-							<td>$title.title</td>
-						</tr>
-					</table>
-				#end
-			</div>
-		</div>
+				<div class="panel panel-default" id="panel_2">
+					<div class="panel-heading">
+						热点人物
+					</div>
+					<div class="panel-body">
+						#foreach($title in $hotPeople)
+							<table class="table">
+								<tr>
+									<td>$title.title</td>
+								</tr>
+							</table>
+						#end
+					</div>
+				</div>
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				热点话题
+				<div class="panel panel-default" id="panel_3">
+					<div class="panel-heading">
+						热点话题
+					</div>
+					<div class="panel-body">
+						#foreach($title in $hotTopic)
+							<table class="table">
+								<tr>
+									<td>$title.title</td>
+								</tr>
+							</table>
+						#end
+					</div>
+				</div>
 			</div>
-			<div class="panel-body">
-				#foreach($title in $hotTopic)
-					<table class="table">
-						<tr>
-							<td>$title.title</td>
-						</tr>
-					</table>
-				#end
+			<div class="col-sm-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked" role="tablist">
+							<li role="presentation" id="sub_nav_1"><a href="javascript:void(0);" onclick="show_panel_1()">热点新闻</a></li>
+							<li role="presentation" id="sub_nav_2"><a href="javascript:void(0);" onclick="show_panel_2()">热点人物</a></li>
+							<li role="presentation" id="sub_nav_3"><a href="javascript:void(0);" onclick="show_panel_3()">热点话题</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 

@@ -29,6 +29,7 @@
 		<property name="prefix" value=""/>
 		<property name="suffix" value=".vm"/>
 		<property name="contentType" value="text/html;charset=utf-8" />
+		<property name="exposeSessionAttributes" value="true" />
 	</bean>
 
 </beans>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>用户注册</title>
+	<link href="resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="resources/js/jquery-2.1.4.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/login_app/app.js"></script>
+</head>
+<body class="blue">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-4">
+			<div style="text-align: center;">
+				<h1>
+					哈工大圈子<br />
+					<small>
+						热点新闻 讨论交流
+					</small>
+				</h1>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					用户登陆
+				</div>
+				<div class="panel-body">
+					<form role="form" action="/login" method="post" id="form" onsubmit="return check();">
+						<div class="form-group">
+							<label class="control-label" for="username">用户名</label>
+							#springBind("userLoginFormBean.username")
+							<input type="text" class="form-control" id="username" name="${status.expression}" placeholder="请输入用户名" value=""/>
+							#foreach($error in $status.errorMessages)<p class="help-block" style="color: red">$error</p> #end
+							<p class="help-block" style="color: red" id="username_help"></p>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="password">密码</label>
+							#springBind("userLoginFormBean.password")
+							<input type="password" class="form-control" id="password" name="${status.expression}" placeholder="请输入密码" value=""/>
+							#foreach($error in $status.errorMessages)<p class="help-block" style="color: red">$error</p> #end
+							<p class="help-block" style="color: red" id="password_help"></p>
+						</div>
+						<input type="submit" class="btn btn-default" value="提交">
+					</form>
+				</div>
+				<div class="panel-footer">
+					#if($loginError)
+						<div class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert"><span
+									aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							$loginError
+						</div>
+					#end
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
