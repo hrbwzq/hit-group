@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>哈工大圈子-首页</title>
-	<link href="resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="resources/css/global_style.css" rel="stylesheet" type="text/css"/>
-	<script src="resources/js/jquery-2.1.4.min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
-	<script src="resources/js/index_app/app.js"></script>
+	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
+	<script src="#springUrl('/resources/js/jquery-2.1.4.min.js')"></script>
+	<script src="#springUrl('/resources/js/bootstrap.min.js')"></script>
+	<script src="#springUrl('/resources/js/index_app/app.js')"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -23,13 +23,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">哈工大圈子</a>
+				<a class="navbar-brand" href="#springUrl('/')">哈工大圈子</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<!--主标题右侧链接组-->
-					<li><a href="#">哈工大热点</a></li>
+					<li><a href="#springUrl('/')">哈工大热点</a></li>
 					<li><a href="#">讨论组</a></li>
 					<li><a href="#">关于我们</a></li>
 				</ul>
@@ -68,7 +68,7 @@
 						#foreach($title in $hotNews)
 							<table class="table">
 								<tr>
-									<td>$title.title</td>
+									<td><a href="news?id=${title.newsId}">${title.title}</a></td>
 								</tr>
 							</table>
 						#end
@@ -83,7 +83,7 @@
 						#foreach($title in $hotPeople)
 							<table class="table">
 								<tr>
-									<td>$title.title</td>
+									<td><a href="news?id=${title.newsId}">${title.title}</a></td>
 								</tr>
 							</table>
 						#end
@@ -98,7 +98,7 @@
 						#foreach($title in $hotTopic)
 							<table class="table">
 								<tr>
-									<td>$title.title</td>
+									<td><a href="news?id=${title.newsId}">${title.title}</a></td>
 								</tr>
 							</table>
 						#end

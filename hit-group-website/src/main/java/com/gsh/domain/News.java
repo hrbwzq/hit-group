@@ -84,6 +84,16 @@ public class News implements Serializable
 		this.newsCategory = newsCategory;
 	}
 
+	public Set<NewsReply> getNewsReplies()
+	{
+		return newsReplies;
+	}
+
+	public void setNewsReplies(Set<NewsReply> newsReplies)
+	{
+		this.newsReplies = newsReplies;
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{

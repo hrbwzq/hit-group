@@ -2,6 +2,7 @@ package com.gsh.service;
 
 import com.gsh.domain.News;
 import com.gsh.domain.NewsCategory;
+import com.gsh.domain.NewsReply;
 import com.gsh.web.news.beans.NewsPageBean;
 
 import java.util.List;
@@ -30,4 +31,18 @@ public interface NewsService
 	 * @return 包含查询信息的PageBean
 	 */
 	public NewsPageBean getNewsByPage(String categoryName, int startPage, int pageSize);
+
+	/**
+	 * 通过ID获得News
+	 * @param newsId 新闻ID
+	 * @return 新闻对象,可能为null
+	 */
+	public News getNewsById(Long newsId);
+
+	/**
+	 * 通过新闻ID获得该新闻全部新闻评论
+	 * @param newsId 新闻ID
+	 * @return 包含新闻评论的列表,可能为空列表
+	 */
+	public List<NewsReply> getNewsReplyByNewsId(Long newsId);
 }

@@ -2,13 +2,16 @@ package com.gsh.service.impl;
 
 import com.gsh.domain.News;
 import com.gsh.domain.NewsCategory;
+import com.gsh.domain.NewsReply;
 import com.gsh.service.NewsService;
 import com.gsh.service.util.PageUtil;
 import com.gsh.web.news.beans.NewsPageBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service(value = "newsService")
 @Transactional
@@ -41,5 +44,23 @@ public class NewsServiceImpl extends CommonService implements NewsService
 		newsPageBean.getNewses().addAll(newses);
 		newsPageBean.setTotalPage(pageCount);
 		return newsPageBean;
+	}
+
+	@Override
+	public News getNewsById(Long newsId)
+	{
+		return this.getNewsDAO().queryNewsById(newsId);
+	}
+
+	@Override
+	public List<NewsReply> getNewsReplyByNewsId(Long newsId)
+	{
+		// 此处为 Hibernate典型错误用法
+//		Set<NewsReply> newsReplySet = this.getNewsDAO().queryNewsById(newsId).getNewsReplies();
+//		List<NewsReply> newsReplyList = new ArrayList<>();
+//		newsReplyList.addAll(newsReplySet);
+//		return newsReplyList;
+
+		return getNewsReplyDAO().getNewsReplyByNewsId(newsId);
 	}
 }

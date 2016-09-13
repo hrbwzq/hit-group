@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 @Component
 public class NewsReplyFormBean
 {
-	@Size(min = 1, max = 100, message = "您输入的评论内容长度不符合要求")
+	@Size(min = 1, max = 1000, message = "您输入的评论内容长度不符合要求")
 	private String content;
 
 	public NewsReplyFormBean()
