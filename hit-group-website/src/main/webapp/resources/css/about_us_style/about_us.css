@@ -1,0 +1,42 @@
+.jumbotron {
+	margin-bottom: 0;
+}
+
+#jumbo_1 {
+	background-color: #3dceed;
+	text-align: center;
+}
+
+#jumbo_2 {
+	color: white;
+	background: fixed url("/resources/images/computer_background.png") no-repeat bottom;
+	background-size: 100%;
+}
+
+#jumbo_3 {
+	background-color: #62e76e;
+	text-align: center;
+}
+
+#jumbo_4 {
+	color: white;
+	background: fixed url("/resources/images/uml_background.jpg") no-repeat bottom;
+	background-size: 100%;
+}
+
+#jumbo_5 {
+	background-color: #3dceed;
+	text-align: center;
+}
+
+#jumbo_6 {
+	color: white;
+	background: fixed url("/resources/images/hit_background.jpg") no-repeat bottom;
+	background-size: 100%;
+	text-align: center;
+}
+
+#back_btn {
+	color: white;
+	background-color: transparent;
+}

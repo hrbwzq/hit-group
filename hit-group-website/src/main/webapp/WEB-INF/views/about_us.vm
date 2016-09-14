@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>关于我们</title>
+	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/about_us_style/about_us.css')" rel="stylesheet" type="text/css"/>
+	<script src="#springUrl('/resources/js/jquery-2.1.4.min.js')"></script>
+	<script src="#springUrl('/resources/js/bootstrap.min.js')"></script>
+	<script src="#springUrl('/resources/js/about_us_app/app.js')"></script>
+</head>
+<body>
+		<div class="jumbotron container-fluid" id="jumbo_1">
+			<h1>哈工大圈子<br /><small>热点新闻 讨论交流</small></h1>
+			<p><a class="btn btn-primary btn-lg" href="#springUrl('/')" role="button">进入首页</a></p>
+		</div>
+		<div class="jumbotron container-fluid" id="jumbo_2">
+			<h1>Source Code</h1>
+			<p><a href="https://github.com/guiji9511/hit-group">https://github.com/guiji9511/hit-group</a></p>
+		</div>
+		<div class="jumbotron container-fluid" id="jumbo_3">
+			<h1>简洁<br /><small>而不简单</small></h1>
+			<p> </p>
+		</div>
+		<div class="jumbotron container-fluid" id="jumbo_4">
+			<h1>Powered by</h1>
+			<p>SpringFramework Hibernate ApacheVelocity Bootstrap</p>
+		</div>
+		<div class="jumbotron container-fluid" id="jumbo_5">
+			<h1>欢迎提出<br /><small>您的宝贵意见</small></h1>
+			<p>E-mail:guiji9511@gmail.com</p>
+		</div>
+		<div class="jumbotron container-fluid" id="jumbo_6">
+			<h1><br /><br /><br />感谢</h1><br />
+			<p>您的关注</p>
+			<br />
+			<a href="#" onclick="return back_top();" class="btn btn-default" id="back_btn">回到顶部</a>
+			<br /><br /><br /><br /><br /><br /><br /><br />
+		</div>
+</body>
+</html>

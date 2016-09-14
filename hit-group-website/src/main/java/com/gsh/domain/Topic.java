@@ -120,6 +120,11 @@ public class Topic implements Serializable
 		this.topicReplies = topicReplies;
 	}
 
+	public String getLastModifiedTimeString()
+	{
+		return this.lastModifiedTime.toString().substring(0, 19);
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
