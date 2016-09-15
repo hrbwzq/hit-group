@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>哈工大圈子-首页</title>
+	<title>哈工大圈子-讨论组</title>
 	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
 	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
 	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
@@ -22,7 +22,7 @@
 					$notice.content
 				</div>
 				<div class="panel-footer">
-					$notice.createTime
+					$notice.createTimeString
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -33,7 +33,7 @@
 					<ul class="list-group">
 						#foreach($topic in $topicPageBean.topics)
 							<li class="list-group-item">
-								$topic.title <small>$topic.getLastModifiedTimeString()</small>
+								<a href="/topic?topic_id=${topic.topicId}&page=1">$topic.title</a> <small>$topic.getLastModifiedTimeString()</small>
 							</li>
 						#end
 					</ul>
@@ -48,6 +48,9 @@
 				</div>
 			</div>
 			<div class="panel panel-default">
+				<div class="panel-heading">
+					发表新的主题
+				</div>
 				<div class="panel-body">
 					<form role="form" action="" method="post" onsubmit="return check();" id="topic_form">
 						<input type="text" class="sr-only" name="pageNum" value="$pageNum" />

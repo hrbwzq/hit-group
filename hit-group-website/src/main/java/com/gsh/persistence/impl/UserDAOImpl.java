@@ -1,7 +1,9 @@
 package com.gsh.persistence.impl;
 
+import com.gsh.domain.Topic;
 import com.gsh.domain.User;
 import com.gsh.persistence.UserDAO;
+import com.gsh.web.consts.PageSize;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -57,5 +59,18 @@ public class UserDAOImpl extends CommonDAO implements UserDAO
 		@SuppressWarnings("unchecked")
 		List<User> userList = query.list();
 		return userList;
+	}
+
+	@Override
+	public List<Topic> getUserRecentTopic(Long userId)
+	{
+		String hql = "from Topic topic where topic.user.userId=:userId order by lastModifiedTime desc";
+		Query query = this.getSession().createQuery(hql);
+		query.setLong("userId", userId);
+		query.setFirstResult(0);
+		query.setMaxResults(PageSize.USER_RECENT_TOPICS);
+		@SuppressWarnings("unchecked")
+		List<Topic> topicList = query.list();
+		return topicList;
 	}
 }

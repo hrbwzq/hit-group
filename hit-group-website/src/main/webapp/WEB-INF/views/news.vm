@@ -34,7 +34,7 @@
 					<ul class="list-group">
 						#foreach($reply in $newsReplyList)
 							<li class="list-group-item">
-								<a href="#">$reply.user.username</a>:  $reply.content
+								<a href="/user_page?user_id=${reply.user.userId}">$reply.user.username</a>:  $reply.content
 							</li>
 						#end
 					</ul>
@@ -49,7 +49,7 @@
 						<input type="text" class="sr-only" name="newsId" value="${news.newsId}" />
 						<div class="form-group">
 							<label class="control-label sr-only" for="content"></label>
-							#springBind("newsReplyFormBean.content")
+							#springBind("topicReplyFormBean.content")
 							<textarea name="content" class="form-control" id="content"
 									#if(!$user)
 										disabled="disabled" placeholder="请先登陆"

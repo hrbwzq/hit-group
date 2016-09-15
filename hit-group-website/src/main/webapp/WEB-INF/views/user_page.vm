@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>$selected_user.username的个人主页</title>
+	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
+	<script src="#springUrl('/resources/js/jquery-2.1.4.min.js')"></script>
+	<script src="#springUrl('/resources/js/bootstrap.min.js')"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+	<div class="container" style="padding-top: 70px">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<image data-src="holder.js?300x300" src="
+					#if($selected_user.thumbnail)
+						$selected_user.thumbnail
+					#else
+						#springUrl('/resources/images/nobody.jpg')
+					#end" alt="$selected_user.username"></image>
+					<div class="caption">
+						<h3>$selected_user.username</h3>
+						<p>$selected_user.email</p>
+						<div class="btn-group">
+							#if($user.userId == $selected_user.userId)
+								<a href="/edit_user_profile?user_id=${selected_user.userId}" class="btn btn-primary">修改个人信息</a>
+							#else
+								<a href="#" class="btn btn-default">私信</a>
+								<a href="#" class="btn btn-default">关注</a>
+								<a href="#" class="btn btn-default">加为好友</a>
+							#end
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						${selected_user.username}的个人信息
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-bordered table-hover">
+							<tr>
+								<td>性别</td>
+								<td>
+									#if($selected_user.sex == "male")
+										男
+									#elseif($selected_user.sex == "female")
+										女
+									#elseif($selected_user.sex == "lovely")
+										(′▽`〃)可爱的男孩子
+									#elseif($selected_user.sex == "secret")
+										(╯°Д°)╯︵ ┻━┻ TA不想告诉你
+									#else
+										(╯°Д°)╯︵ ┻━┻ TA不想告诉你
+									#end
+								</td>
+							</tr>
+							<tr>
+								<td>真实姓名</td>
+								<td>
+								#if($selected_user.realName)
+									$selected_user.realName
+								#else
+									(｀□′)╯︵ ┻━┻ TA不想告诉你
+								#end
+								</td>
+							</tr>
+							<tr>
+								<td>年龄</td>
+								<td>
+									#if($selected_user.age)
+										$selected_user.age
+									#else
+										( ╯-_-)╯┴—┴ TA不想告诉你
+									#end
+								</td>
+							</tr>
+							<tr>
+								<td>专业</td>
+								<td>
+									#if($selected_user.major)
+										$selected_user.major
+									#else
+										(ノ—_—)ノ┴————┴ TA不想告诉你
+									#end
+								</td>
+							</tr>
+							<tr>
+								<td>住址</td>
+								<td>
+									#if($selected_user.address)
+										$selected_user.address
+									#else
+										（╯－＿－）╯╧╧ TA不想告诉你
+									#end
+								</td>
+							</tr>
+							<tr>
+								<td>QQ</td>
+								<td>
+									#if($selected_user.qq)
+										$selected_user.qq
+									#else
+										（ノ*-_-*)ノ┴—┴ TA不想告诉你
+									#end
+								</td>
+							</tr>
+							<tr>
+								<td>
+									电话
+								</td>
+								<td>
+									#if($selected_user.phone)
+										$selected_user.phone
+									#else
+										(/= _ =)/~┴┴ TA不想告诉你
+									#end
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						#if($selected_user.sex == "male")
+							他的动态
+						#elseif($selected_user.sex == "female")
+							她的动态
+						#else
+							TA的动态
+						#end
+					</div>
+					<div class="panel-body">
+						<ul class="list-group">
+							#foreach($topic in $topic_list)
+								<li class="list-group-item">
+									$topic.title
+								</li>
+							#end
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

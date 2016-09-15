@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>哈工大圈子-首页</title>
+	<title>哈工大圈子-热点</title>
 	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
 	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
 	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>

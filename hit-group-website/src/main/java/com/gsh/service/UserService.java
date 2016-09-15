@@ -2,8 +2,10 @@ package com.gsh.service;
 
 import com.gsh.domain.AddFriendApply;
 import com.gsh.domain.Chat;
+import com.gsh.domain.Topic;
 import com.gsh.domain.User;
 import com.gsh.web.backend.beans.UserPageBean;
+import com.gsh.web.forum.beans.UserProfileFormBean;
 import com.gsh.web.news.beans.NewsReplyFormBean;
 import com.gsh.web.news.beans.UserLoginFormBean;
 import com.gsh.web.news.beans.UserRegistFormBean;
@@ -56,12 +58,25 @@ public interface UserService
 	public void addNewsReply(NewsReplyFormBean newsReplyFormBean, Long newsId, Long userId);
 
 	/**
-	 * 更新用户个人信息,查询字段为ID或username任意一个,
+	 * 更新用户个人信息,查询字段为ID或username任意一个
 	 * 可更新字段包括sex,thumbnail,realName,age,major,
 	 * address,qq,phone
 	 * @param user 包含新的个人信息的用户类
 	 */
 	public void updateUserOptionalInfo(User user);
+
+	/**
+	 * 更新用户个人信息
+	 * @param userProfileFormBean 包含新信息的FormBean
+	 */
+	public void updateUserOptionalInfo(UserProfileFormBean userProfileFormBean, Long userId);
+
+	/**
+	 * 通过用户ID更新头像图片
+	 * @param imgPath 头像图片URL
+	 * @param userId 用户ID
+	 */
+	public void updateUserThumbnail(String imgPath, Long userId);
 
 	/**
 	 * 获取所有好友信息
@@ -90,6 +105,13 @@ public interface UserService
 	 * @param toUserId 好友申请接收者
 	 */
 	public void acceptAddFriendApply(Long fromUserId, Long toUserId);
+
+	/**
+	 * 删除好友申请
+	 * @param fromUserId 好友申请发起者
+	 * @param toUserId 好友申请接收者
+	 */
+	public void deleteAddFriendApply(Long fromUserId, Long toUserId);
 
 	/**
 	 * 关注一个用户
@@ -122,5 +144,11 @@ public interface UserService
 	 * @param userId 用户ID
 	 */
 	public void releaseUser(Long userId);
+
+	/**
+	 * 得到用户最近发帖
+	 * @return 保函查询结果的列表,可能为空
+	 */
+	public List<Topic> getUserRecentTopic(Long userId);
 
 }

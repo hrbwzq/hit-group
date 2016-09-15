@@ -27,4 +27,11 @@ public interface TopicService
 	 */
 	public void deleteTopicById(Long topicId);
 
+	/**
+	 * 根据Topic ID查询Topic对象
+	 * @param topicId 主题帖ID
+	 * @return 查询结果,可能为null
+	 */
+	public Topic queryTopicById(Long topicId);
+
 }

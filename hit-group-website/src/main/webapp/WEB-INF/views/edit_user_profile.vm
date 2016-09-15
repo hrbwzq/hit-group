@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>$selected_user.username的个人主页</title>
+	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
+	<script src="#springUrl('/resources/js/jquery-2.1.4.min.js')"></script>
+	<script src="#springUrl('/resources/js/bootstrap.min.js')"></script>
+	<script src="#springUrl('/resources/js/user_profile_app/app.js')"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="thumbnail">
+				<image data-src="holder.js?300x300" src="
+					#if($selected_user.thumbnail)
+						$selected_user.thumbnail
+					#else
+						#springUrl('/resources/images/nobody.jpg')
+					#end" alt="$selected_user.username"></image>
+				<div class="caption">
+					<h3>$selected_user.username</h3>
+					<p>$selected_user.email</p>
+					<div class="btn-group">
+						<a href="/edit_user_thumbnail?user_id=${selected_user.userId}" class="btn btn-default">上传新头像</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					${selected_user.username}的个人信息
+				</div>
+				<div class="panel-body">
+					<div class="panel panel-default">
+						<h3>│･ω･`)＜这些都是可选的,可以不填</h3>
+					</div>
+					<form autocomplete="off" role="form" action="/edit_user_profile" method="post" id="user_profile_form" onsubmit="return check();">
+						<table class="table table-striped table-bordered table-hover">
+							<tr>
+								<td><div ondblclick="click_this();">性别</div></td>
+								<td>
+									<div class="form-group">
+										<div class="radio-inline">
+											<label>
+												#springBind("user_profile_form_bean.sex")
+												<input type="radio" name="sex" value="male"
+													#if($user.sex == "male")
+													   checked="checked"
+													#end
+														>男
+											</label>
+										</div>
+										<div class="radio-inline">
+											<label>
+												<input type="radio" name="sex" value="female"
+													#if($user.sex == "female")
+													   checked="checked"
+													#end
+														>女
+											</label>
+										</div>
+										<div class="radio-inline" id="hidden_sex_radio" style="display: none">
+											<label>
+												<input type="radio" name="sex" value="lovely"
+													#if($user.sex == "lovely")
+													   checked="checked"
+													#end
+														>(′▽`〃)
+											</label>
+										</div>
+										<div class="radio-inline">
+											<label>
+												<input type="radio" name="sex" value="secret"
+													#if($user.sex == "secret")
+													   checked="checked"
+													#end
+														>保密
+											</label>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>真实姓名</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="realname"></label>
+										#springBind("user_profile_form_bean.realname")
+										<input type="text" class="form-control" id="realname" name="realname" value="$!{user.realName}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>年龄</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="age"></label>
+										#springBind("user_profile_form_bean.age")
+										<input type="text" class="form-control" id="age" name="age" value="$!{user.age}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>专业</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="major"></label>
+										#springBind("user_profile_form_bean.major")
+										<input type="text" class="form-control" id="major" name="major" value="$!{user.major}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>住址</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="address"></label>
+										#springBind("user_profile_form_bean.address")
+										<input type="text" class="form-control" id="address" name="address" value="$!{user.address}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>QQ</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="qq"></label>
+										#springBind("user_profile_form_bean.qq")
+										<input type="text" class="form-control" id="qq" name="qq" value="$!{user.qq}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									电话
+								</td>
+								<td>
+									<div class="form-group">
+										<label class="control-label sr-only" for="phone"></label>
+										#springBind("user_profile_form_bean.phone")
+										<input type="text" class="form-control" id="phone" name="phone" value="$!{user.phone}" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="submit" class="btn btn-default" value="提交修改">
+								</td>
+							</tr>
+						</table>
+						<p class="help-block" id="edit_user_profile_error" style="color: red"></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>

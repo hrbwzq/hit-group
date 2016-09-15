@@ -58,4 +58,10 @@ public class TopicServiceImpl extends CommonService implements TopicService
 		topic.setDeleted(1);
 	}
 
+	@Override
+	public Topic queryTopicById(Long topicId)
+	{
+		return getTopicDAO().queryTopicById(topicId);
+	}
+
 }

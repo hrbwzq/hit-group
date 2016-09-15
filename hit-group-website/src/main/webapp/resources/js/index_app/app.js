@@ -1,6 +1,9 @@
 $(document).ready(
 	function ()
 	{
+
+		console.log("（╬￣皿￣）把控制台给我关上");
+
 		$("#panel_1").show();
 		$("#panel_2").hide();
 		$("#panel_3").hide();

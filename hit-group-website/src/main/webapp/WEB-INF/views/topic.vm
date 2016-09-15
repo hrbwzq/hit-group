@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>哈工大圈子-讨论组</title>
+	<link href="#springUrl('/resources/css/bootstrap-theme.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+	<link href="#springUrl('/resources/css/global_style.css')" rel="stylesheet" type="text/css"/>
+	<script src="#springUrl('/resources/js/jquery-2.1.4.min.js')"></script>
+	<script src="#springUrl('/resources/js/bootstrap.min.js')"></script>
+	<script src="#springUrl('/resources/js/topic_app/app.js')"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			$topic.user.username 发表了主题
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<image data-src="holder.js?200x200" src="
+					#if($topic.user.thumbnail)
+						$topic.user.thumbnail
+					#else
+						#springUrl('/resources/images/nobody.jpg')
+					#end" alt="$topic.user.username"></image>
+						<div class="caption">
+							<h3><a href="/user_page?user_id=${topic.user.userId}">$topic.user.username</a></h3>
+							<p>$topic.user.email</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-10">
+					<p>$topic.content</p>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			楼主
+		</div>
+	</div>
+	#foreach($topicReply in $topic_reply_page_bean.topicReplyList)
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="thumbnail">
+							<image data-src="holder.js?200x200" src="
+								#if($topicReply.user.thumbnail)
+									$topicReply.user.thumbnail
+								#else
+									#springUrl('/resources/images/nobody.jpg')
+								#end" alt="$topicReply.user.username"></image>
+							<div class="caption">
+								<h3><a href="/user_page?user_id=${topicReply.user.userId}">$topicReply.user.username</a></h3>
+								<p>$topicReply.user.email</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-10">
+						#if($topicReply.parentTopicReply)
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<strong>Re:$topicReply.parentTopicReply.user.username</strong>
+									<br />
+									<p><small>$topicReply.parentTopicReply.content</small></p>
+								</div>
+							</div>
+						#end
+						$topicReply.content
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<span>${topicReply.floor}楼</span>
+				<span style="float: right"><a href="javascript:void(0);" onclick="show_reply_textarea(${topicReply.floor});">回复</a></span>
+			</div>
+		</div>
+		<div class="panel panel-default" id="reply_textarea_${topicReply.floor}" style="display: none">
+			<div class="panel-body">
+				<form role="form" action="/topic" method="post" id="form" onsubmit="return check_internal(${topicReply.floor});">
+					<input type="text" class="sr-only" name="topic_id" value="${topic.topicId}" />
+					<input type="text" class="sr-only" name="topic_reply_id" value="${topicReply.topicReplyId}" />
+					<div class="form-group">
+						<label class="control-label sr-only" for="content_${topicReply.floor}"></label>
+						#springBind("topicReplyFormBean.content")
+						<textarea name="content" class="form-control" id="content_${topicReply.floor}"
+							#if(!$user)
+							      disabled="disabled" placeholder="请先登陆"
+							#else
+							      placeholder="说点什么..."
+							#end
+								></textarea>
+						<p class="help-block" style="color: red" id="reply_help_${topicReply.floor}"></p>
+						<p class="help-block" style="color: red">$!{replyError}</p>
+					</div>
+					<input type="submit" value="发表" class="btn btn-default"/>
+				</form>
+			</div>
+		</div>
+	#end
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="btn-group">
+				<a href="/topic?topic_id=$topic.topicId&page=$topic_reply_page_bean.previousPage" class="btn btn-default">上一页</a>
+				<a href="/topic?topic_id=$topic.topicId&page=$topic_reply_page_bean.nextPage" class="btn btn-default">下一页</a>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			发表评论
+		</div>
+		<div class="panel-body">
+			<form role="form" action="/topic" method="post" id="form" onsubmit="return check();">
+				<input type="text" class="sr-only" name="topic_id" value="${topic.topicId}" />
+				<input type="text" class="sr-only" name="topic_reply_id" value="" />
+				<div class="form-group">
+					<label class="control-label sr-only" for="content"></label>
+					#springBind("topicReplyFormBean.content")
+					<textarea name="content" class="form-control" id="content"
+						#if(!$user)
+						      disabled="disabled" placeholder="请先登陆"
+						#else
+						      placeholder="说点什么..."
+						#end
+							></textarea>
+					<p class="help-block" style="color: red" id="reply_help"></p>
+					<p class="help-block" style="color: red">$!{replyError}</p>
+				</div>
+				<input type="submit" value="发表" class="btn btn-default"/>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

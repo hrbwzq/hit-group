@@ -78,6 +78,11 @@ public class Notice
 		this.user = user;
 	}
 
+	public String getCreateTimeString()
+	{
+		return createTime.toString().substring(0, 19);
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{

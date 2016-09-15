@@ -32,4 +32,6 @@
 		<property name="exposeSessionAttributes" value="true" />
 	</bean>
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
 </beans>

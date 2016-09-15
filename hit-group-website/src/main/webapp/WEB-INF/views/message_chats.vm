@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>我的私信</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/message_chats_app/app.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			我的私信
+		</div>
+		<div class="panel-body">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="javascript:void(0);" onclick="read_toggle();">未读</a></li>
+				<li role="presentation"><a href="javascript:void(0);" onclick="read_toggle();">已读</a></li>
+			</ul>
+			<ul class="list-group" id="unread">
+				#foreach($chat in $chat_list)
+					#if($chat.read == 0)
+						<li class="list-group-item">
+							<strong>From $chat.fromUser.username</strong>
+							<br />
+							<p>$chat.content</p>
+							<div class="btn-group">
+								<a href="/message/read_chat?chat_id=${chat.chatId}" class="btn btn-default">标为已读</a>
+								<a href="/message/delete_chat?chat_id=${chat.chatId}" class="btn btn-default">删除</a>
+							</div>
+						</li>
+					#end
+				#end
+			</ul>
+			<ul class="list-group" id="read" style="display: none;">
+				#foreach($chat in $chat_list)
+					#if($chat.read == 1)
+						<li class="list-group-item">
+							<strong>From $chat.fromUser.username</strong>
+							<br />
+							<p>$chat.content</p>
+							<div class="btn-group">
+								<a href="/message/delete_chat?chat_id=${chat.chatId}" class="btn btn-default">删除</a>
+							</div>
+						</li>
+					#end
+				#end
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

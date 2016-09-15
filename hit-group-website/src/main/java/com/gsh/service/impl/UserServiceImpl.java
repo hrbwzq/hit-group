@@ -6,6 +6,7 @@ import com.gsh.service.util.CopyUserPropertyUtil;
 import com.gsh.service.util.DefaultUserFactory;
 import com.gsh.service.util.PageUtil;
 import com.gsh.web.backend.beans.UserPageBean;
+import com.gsh.web.forum.beans.UserProfileFormBean;
 import com.gsh.web.news.beans.NewsReplyFormBean;
 import com.gsh.web.news.beans.UserLoginFormBean;
 import com.gsh.web.news.beans.UserRegistFormBean;
@@ -124,6 +125,82 @@ public class UserServiceImpl extends CommonService implements UserService
 	}
 
 	@Override
+	public void updateUserOptionalInfo(UserProfileFormBean userProfileFormBean, Long userId)
+	{
+		User user = getUserDAO().getUserById(userId);
+		if(user != null)
+		{
+			//恶心代码,需要重构！！
+			if(!userProfileFormBean.getSex().equals(""))
+			{
+				user.setSex(userProfileFormBean.getSex());
+			}
+			else
+			{
+				user.setSex("secret");
+			}
+			if(!userProfileFormBean.getRealname().equals(""))
+			{
+				user.setRealName(userProfileFormBean.getRealname());
+			}
+			else
+			{
+				user.setRealName(null);
+			}
+			if(userProfileFormBean.getAge() != null)
+			{
+				user.setAge(userProfileFormBean.getAge());
+			}
+			else
+			{
+				user.setAge(null);
+			}
+			if(!userProfileFormBean.getMajor().equals(""))
+			{
+				user.setMajor(userProfileFormBean.getMajor());
+			}
+			else
+			{
+				user.setMajor(null);
+			}
+			if(!userProfileFormBean.getAddress().equals(""))
+			{
+				user.setAddress(userProfileFormBean.getAddress());
+			}
+			else
+			{
+				user.setAddress(null);
+			}
+			if(!userProfileFormBean.getQq().equals(""))
+			{
+				user.setQq(userProfileFormBean.getQq());
+			}
+			else
+			{
+				user.setQq(null);
+			}
+			if(!userProfileFormBean.getPhone().equals(""))
+			{
+				user.setPhone(userProfileFormBean.getPhone());
+			}
+			else
+			{
+				user.setPhone(null);
+			}
+		}
+	}
+
+	@Override
+	public void updateUserThumbnail(String imgPath, Long userId)
+	{
+		User user = getUserDAO().getUserById(userId);
+		if(user != null)
+		{
+			user.setThumbnail(imgPath);
+		}
+	}
+
+	@Override
 	public List<User> getAllFriends(Long userId)
 	{
 		Set<User> userSet =  getUserDAO().getUserById(userId).getFriends();
@@ -155,6 +232,12 @@ public class UserServiceImpl extends CommonService implements UserService
 	}
 
 	@Override
+	public void deleteAddFriendApply(Long fromUserId, Long toUserId)
+	{
+		getFriendApplyDAO().deleteFriendApply(fromUserId, toUserId);
+	}
+
+	@Override
 	public void watchUser(Long fromUserId, Long toUserId)
 	{
 		User fromUser = getUserDAO().getUserById(fromUserId);
@@ -166,11 +249,7 @@ public class UserServiceImpl extends CommonService implements UserService
 	@Override
 	public List<Chat> getAllChats(Long userId)
 	{
-		User user = getUserDAO().getUserById(userId);
-		Set<Chat> chatSet = user.getRecievedChats();
-		List<Chat> chatList = new ArrayList<>();
-		chatList.addAll(chatSet);
-		return chatList;
+		return getChatDAO().queryChatsByUserId(userId);
 	}
 
 
@@ -190,5 +269,11 @@ public class UserServiceImpl extends CommonService implements UserService
 	public void releaseUser(Long userId)
 	{
 		getUserDAO().getUserById(userId).setBanned(0);
+	}
+
+	@Override
+	public List<Topic> getUserRecentTopic(Long userId)
+	{
+		return getUserDAO().getUserRecentTopic(userId);
 	}
 }

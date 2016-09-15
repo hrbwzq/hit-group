@@ -25,8 +25,9 @@ public class TopicReplyDAOImpl extends CommonDAO implements TopicReplyDAO
 	@Override
 	public List<TopicReply> queryTopicReplyByPage(Long topicId, int startPage, int pageSize)
 	{
-		String hql = "from TopicReply t where deleted!=1 order by floor asc";
+		String hql = "from TopicReply t where deleted!=1 and t.topic.topicId=:topicId order by floor asc";
 		Query query = this.getSession().createQuery(hql);
+		query.setLong("topicId", topicId);
 		query.setFirstResult((startPage - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		@SuppressWarnings("unchecked")
@@ -50,14 +51,14 @@ public class TopicReplyDAOImpl extends CommonDAO implements TopicReplyDAO
 		String hql = "select max(floor) from TopicReply t where t.topic.topicId=:topicId";
 		Query query = this.getSession().createQuery(hql);
 		query.setLong("topicId", topicId);
-		Long result = (Long)query.uniqueResult();
+		Integer result = (Integer)query.uniqueResult();
 		if(result == null)
 		{
 			return 0;
 		}
 		else
 		{
-			return result.intValue();
+			return result;
 		}
 	}
 }

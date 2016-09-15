@@ -1,5 +1,6 @@
 package com.gsh.persistence;
 
+import com.gsh.domain.Topic;
 import com.gsh.domain.User;
 
 import java.util.List;
@@ -46,5 +47,12 @@ public interface UserDAO
 	 * @return 包含查询结果的列表,可能为空列表
 	 */
 	public List<User> queryUsersByPage(int startPage, int pageSize);
+
+	/**
+	 * 得到用户最近发帖
+	 * @param userId 用户ID
+	 * @return 保函查询结果的列表
+	 */
+	public List<Topic> getUserRecentTopic(Long userId);
 
 }

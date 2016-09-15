@@ -36,6 +36,10 @@ public class PageBeanSupport
 		{
 			nextPage = this.currentPage;
 		}
+		else if(this.currentPage > this.totalPage && this.totalPage == 0)
+		{
+			return 1;
+		}
 		else
 		{
 			throw new RuntimeException("页码超过分页上限");
