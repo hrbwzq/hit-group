@@ -41,3 +41,8 @@
 
 ## 基本功能已完成
 功能bug和安全性问题有待测试
+
+## 图
+![](docs/screenshots/1.png)
+![](docs/screenshots/2.png)
+![](docs/screenshots/3.png)
