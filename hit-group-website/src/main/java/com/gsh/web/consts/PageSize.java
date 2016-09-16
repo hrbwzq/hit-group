@@ -24,4 +24,9 @@ public class PageSize
 	 * 用户个人信息页发帖动态展示数
 	 */
 	public static final int USER_RECENT_TOPICS = 20;
+
+	/**
+	 * 管理后台用户列表分页数
+	 */
+	public static final int BACKEND_USER_PAGE_SIZE = 20;
 }

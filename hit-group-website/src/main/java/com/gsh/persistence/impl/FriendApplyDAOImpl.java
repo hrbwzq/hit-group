@@ -46,4 +46,16 @@ public class FriendApplyDAOImpl extends CommonDAO implements FriendApplyDAO
 			session.delete(addFriendApply);
 		}
 	}
+
+	@Override
+	public AddFriendApply getApplyByUserId(Long fromUserId, Long toUserId)
+	{
+		Session session = this.getSession();
+		String hql = "from AddFriendApply afa where toUserId=:toUserId and fromUserId=:fromUserId";
+		Query query = session.createQuery(hql);
+		query.setLong("toUserId", toUserId);
+		query.setLong("fromUserId", fromUserId);
+		return (AddFriendApply)query.uniqueResult();
+	}
+
 }

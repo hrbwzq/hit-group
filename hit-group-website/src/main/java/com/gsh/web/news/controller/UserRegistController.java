@@ -2,6 +2,7 @@ package com.gsh.web.news.controller;
 
 import com.gsh.service.UserService;
 import com.gsh.web.news.beans.UserRegistFormBean;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +48,7 @@ public class UserRegistController
 			else
 			{
 				model.addAttribute("username", userRegistFormBean.getUsername());
+				userRegistFormBean.setPassword(new String(DigestUtils.md5(userRegistFormBean.getPassword())));
 				userService.regist(userRegistFormBean);
 				return "regist_success";
 			}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>后台管理</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/backend_app/app.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="/backend/user_manage">用户管理</a></li>
+		<li role="presentation"><a href="/backend/notice">公告管理</a></li>
+	</ul>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			用户列表
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped table-hover">
+				#foreach($u in $user_page_bean.users)
+					<tr>
+						<td>$u.username</td>
+						<td>
+							#if($u.banned == 0)
+								<a href="/backend/ban?user_id=${u.userId}" class="btn btn-default">封禁</a>
+							#else
+								<a href="/backend/release?user_id=${u.userId}" class="btn btn-default">解封</a>
+							#end
+						</td>
+					</tr>
+				#end
+			</table>
+			<div class="btn-group">
+				<a href="/backend/user_manage?page=${user_page_bean.previousPage}" class="btn btn-default">上一页</a>
+				<a href="/backend/user_manage?page=${user_page_bean.nextPage}" class="btn btn-default">下一页</a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

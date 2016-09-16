@@ -210,6 +210,34 @@ public class UserServiceImpl extends CommonService implements UserService
 	}
 
 	@Override
+	public void deleteFriend(Long userId, Long friendId)
+	{
+		User user = getUserDAO().getUserById(userId);
+		User friend = getUserDAO().getUserById(friendId);
+		Set<User> friends = user.getFriends();
+		Set<User> friendsRef = friend.getFriends();
+
+		if(friends.contains(friend))
+		{
+			friends.remove(friend);
+		}
+		if(friendsRef.contains(user))
+		{
+			friendsRef.remove(user);
+		}
+
+	}
+
+	@Override
+	public List<User> getAllWatchers(Long userId)
+	{
+		Set<User> userSet = getUserDAO().getUserById(userId).getWatchers();
+		List<User> userList = new ArrayList<>();
+		userList.addAll(userSet);
+		return userList;
+	}
+
+	@Override
 	public List<AddFriendApply> getAddFriendApplies(Long userId)
 	{
 		return getFriendApplyDAO().getToUserApply(userId);
@@ -219,6 +247,12 @@ public class UserServiceImpl extends CommonService implements UserService
 	public void makeAddFriendApply(Long fromUserId, Long toUserId)
 	{
 		getFriendApplyDAO().addFriendApply(fromUserId, toUserId);
+	}
+
+	@Override
+	public boolean ifApplyExist(Long userId1, Long userId2)
+	{
+		return (this.getFriendApplyDAO().getApplyByUserId(userId1, userId2) != null || this.getFriendApplyDAO().getApplyByUserId(userId2, userId1) != null);
 	}
 
 	@Override
@@ -242,7 +276,8 @@ public class UserServiceImpl extends CommonService implements UserService
 	{
 		User fromUser = getUserDAO().getUserById(fromUserId);
 		User toUser = getUserDAO().getUserById(toUserId);
-		fromUser.getWatchers().add(toUser);
+		fromUser.getWatchersRef().add(toUser);
+		toUser.getWatchers().add(fromUser);
 		toUser.setWatched(toUser.getWatched() + 1);
 	}
 
@@ -275,5 +310,15 @@ public class UserServiceImpl extends CommonService implements UserService
 	public List<Topic> getUserRecentTopic(Long userId)
 	{
 		return getUserDAO().getUserRecentTopic(userId);
+	}
+
+	@Override
+	public List<Privilege> getAllPrivileges(Long userId)
+	{
+		User user = this.getUserDAO().getUserById(userId);
+		List<Privilege> privilegeList = new ArrayList<>();
+		Set<Privilege> privilegeSet = user.getPrivileges();
+		privilegeList.addAll(privilegeSet);
+		return privilegeList;
 	}
 }

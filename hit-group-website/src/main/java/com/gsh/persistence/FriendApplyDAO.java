@@ -26,4 +26,13 @@ public interface FriendApplyDAO
 	 * @param toUserId 申请接收用户
 	 */
 	public void deleteFriendApply(Long fromUserId, Long toUserId);
+
+	/**
+	 * 通过用户ID获得好友申请
+	 * @param fromUserId 来源用户ID
+	 * @param toUserId 去向用户ID
+	 * @return 好友申请对象
+	 */
+	public AddFriendApply getApplyByUserId(Long fromUserId, Long toUserId);
+
 }

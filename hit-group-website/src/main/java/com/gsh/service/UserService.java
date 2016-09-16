@@ -1,9 +1,6 @@
 package com.gsh.service;
 
-import com.gsh.domain.AddFriendApply;
-import com.gsh.domain.Chat;
-import com.gsh.domain.Topic;
-import com.gsh.domain.User;
+import com.gsh.domain.*;
 import com.gsh.web.backend.beans.UserPageBean;
 import com.gsh.web.forum.beans.UserProfileFormBean;
 import com.gsh.web.news.beans.NewsReplyFormBean;
@@ -86,6 +83,20 @@ public interface UserService
 	public List<User> getAllFriends(Long userId);
 
 	/**
+	 * 删除好友
+	 * @param userId 用户ID
+	 * @param friendId 好友ID
+	 */
+	public void deleteFriend(Long userId, Long friendId);
+
+	/**
+	 * 获得所有关注者
+	 * @param userId 用户ID
+	 * @return 包含所有关注者的列表,可能为空列表
+	 */
+	public List<User> getAllWatchers(Long userId);
+
+	/**
 	 * 获取所有好友申请
 	 * @param userId 用户ID
 	 * @return 包含所有好友申请的列表
@@ -98,6 +109,14 @@ public interface UserService
 	 * @param toUserId 好友申请接收者
 	 */
 	public void makeAddFriendApply(Long fromUserId, Long toUserId);
+
+	/**
+	 * 判断好友申请是否存在
+	 * @param userId1 用户ID
+	 * @param userId2 用户ID
+	 * @return 好友申请存在返回true,不存在返回false
+	 */
+	public boolean ifApplyExist(Long userId1, Long userId2);
 
 	/**
 	 * 接受好友申请
@@ -150,5 +169,12 @@ public interface UserService
 	 * @return 保函查询结果的列表,可能为空
 	 */
 	public List<Topic> getUserRecentTopic(Long userId);
+
+	/**
+	 * 得到用户所有权限
+	 * @param userId 用户ID
+	 * @return 权限列表
+	 */
+	public List<Privilege> getAllPrivileges(Long userId);
 
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>朋友圈</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/friend_circle_app/app.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="/circle/friend_list">我的朋友</a></li>
+		<li role="presentation"><a href="/circle/search_friend">查找朋友</a></li>
+	</ul>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			好友列表
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped table-hover">
+				#foreach($friend in $friend_list)
+					<tr>
+						<td>$friend.username</td>
+						<td>
+							<a href="/message/send_chat?to_user_id=${friend.userId}" class="btn btn-default">私信</a>
+							<a href="/circle/delete_friend?user_id=${friend.userId}" class="btn btn-default">删除</a>
+						</td>
+					</tr>
+				#end
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 注意
+ * watchers:关注我的人集合
+ * watchedRef 我已经关注的人集合
+ */
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable

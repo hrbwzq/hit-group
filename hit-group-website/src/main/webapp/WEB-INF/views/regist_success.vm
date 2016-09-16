@@ -23,7 +23,7 @@
 					<p>ヽ(*´∀｀)八(´∀｀*)ノ</p>
 				</div>
 				<div class="panel-footer">
-					<a class="btn btn-default" href="#">去登陆页</a>
+					<a class="btn btn-default" href="/login">去登陆页</a>
 				</div>
 			</div>
 		</div>

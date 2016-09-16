@@ -73,4 +73,5 @@ public class UserDAOImpl extends CommonDAO implements UserDAO
 		List<Topic> topicList = query.list();
 		return topicList;
 	}
+
 }
