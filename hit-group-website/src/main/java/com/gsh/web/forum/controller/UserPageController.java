@@ -111,7 +111,7 @@ public class UserPageController
 
 				return "edit_user_thumbnail";
 			}
-			String basePath = httpServletRequest.getServletContext().getRealPath("/resources/thumbnails");
+			String basePath = httpServletRequest.getSession().getServletContext().getRealPath("/resources/thumbnails");
 			String uuid = UUID.randomUUID().toString();
 			File targetFile = new File(basePath, uuid + ".png");
 			try
