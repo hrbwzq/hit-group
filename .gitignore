@@ -1,4 +1,7 @@
 .idea/*
 hit-group.iml
 hit-group-crawler/hit-group-crawler.iml
+hit-group-crawler/target/*
 hit-group-website/hit-group-website.iml
+hit-group-website/target/*
+
