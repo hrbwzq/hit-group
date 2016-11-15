@@ -15,7 +15,7 @@
 	<!-- 静态资源文件夹-->
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 	<!-- 控制器所在包-->
-	<context:component-scan base-package="com.gsh.web.news.controller,com.gsh.web.backend.controller,com.gsh.web.forum.controller" />
+	<context:component-scan base-package="com.gsh.web.news.controller,com.gsh.web.backend.controller,com.gsh.web.forum.controller,com.gsh.web.crawler.service" />
 
 	<!-- Velocity视图模板配置-->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
