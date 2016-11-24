@@ -15,5 +15,18 @@
 			<version>1.8.1</version>
 		</dependency>
 	</dependencies>
-
+	<build>
+		<finalName>hit-group-crawler</finalName>
+		<plugins>
+			<!--设置编译级别和运行环境为Java7-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -49,7 +49,7 @@
 						<input type="text" class="sr-only" name="newsId" value="${news.newsId}" />
 						<div class="form-group">
 							<label class="control-label sr-only" for="content"></label>
-							#springBind("topicReplyFormBean.content")
+							#springBind("newsReplyFormBean.content")
 							<textarea name="content" class="form-control" id="content"
 									#if(!$user)
 										disabled="disabled" placeholder="请先登陆"
