@@ -1,18 +1,12 @@
-create database if not exists hit_group;
+drop database if exists hit_group;
+create database hit_group;
 use hit_group;
-drop table if exists t_topic_reply;
-drop table if exists t_topic;
-drop table if exists t_user_privilege;
-drop table if exists t_privilege;
-drop table if exists t_notice;
-drop table if exists t_chat;
-drop table if exists t_news_reply;
-drop table if exists t_news;
-drop table if exists t_news_category;
-drop table if exists t_watchers;
-drop table if exists t_friends;
-drop table if exists t_user;
-drop table if exists t_friends_validate;
+create table t_group
+(
+	group_id bigint AUTO_INCREMENT,
+	name varchar(255) NOT NULL UNIQUE,
+	PRIMARY KEY (group_id)
+);
 create table t_user
 (
 	user_id bigint AUTO_INCREMENT,
@@ -41,7 +35,6 @@ create table t_friends
 	CONSTRAINT t_friends_user_user_id_fk FOREIGN KEY(user_id) REFERENCES t_user(user_id),
 	CONSTRAINT t_friends_friend_user_id_fk FOREIGN KEY(friend_id) REFERENCES t_user(user_id)
 );
-
 create table t_watchers
 (
 	user_id bigint,
@@ -122,8 +115,10 @@ create table t_topic
 	last_modified_time datetime NOT NULL,
 	deleted int NOT NULL,
 	user_user_id bigint NOT NULL,
+	group_id bigint NOT NULL,
 	PRIMARY KEY(topic_id),
-	CONSTRAINT t_topic_user_user_id_fk FOREIGN KEY(user_user_id) REFERENCES t_user(user_id)
+	CONSTRAINT t_topic_user_user_id_fk FOREIGN KEY(user_user_id) REFERENCES t_user(user_id),
+	CONSTRAINT t_topic_group_group_id_fk FOREIGN KEY (group_id) REFERENCES t_group(group_id)
 );
 create table t_topic_reply
 (
@@ -145,6 +140,14 @@ create table t_friends_validate
 	from_user_id bigint,
 	to_user_id bigint,
 	PRIMARY KEY(id)
+);
+create table t_user_group
+(
+	user_id bigint,
+	group_id bigint,
+	PRIMARY KEY (user_id, group_id),
+	CONSTRAINT t_user_group_user_user_id_fk FOREIGN KEY (user_id) REFERENCES t_user(user_id),
+	CONSTRAINT t_user_group_group_group_id_fk FOREIGN KEY (group_id) REFERENCES t_group(group_id)
 );
 insert into t_privilege(privilege) values ('user');
 insert into t_privilege(privilege) values ('administrator');

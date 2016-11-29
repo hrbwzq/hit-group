@@ -42,4 +42,30 @@ public class TopicDAOImpl extends CommonDAO implements TopicDAO
 		Long result = (Long)query.uniqueResult();
 		return result.intValue();
 	}
+
+	@Override
+	public List<Topic> queryTopicByPageAndGroupName(int startPage, int pageSize, String groupName)
+	{
+		String hql = "from Topic topic where deleted!=1 and topic.group.name=:groupName order by lastModifiedTime desc";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("groupName", groupName);
+		query.setFirstResult((startPage - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<Topic> topicList = query.list();
+		return topicList;
+	}
+
+	@Override
+	public List<Topic> queryTopicByPageAndGroupId(int startPage, int pageSize, Long groupId)
+	{
+		String hql = "from Topic topic where deleted!=1 and topic.group.groupId=:groupId order by lastModifiedTime desc";
+		Query query = this.getSession().createQuery(hql);
+		query.setLong("groupId", groupId);
+		query.setFirstResult((startPage - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<Topic> topicList = query.list();
+		return topicList;
+	}
 }

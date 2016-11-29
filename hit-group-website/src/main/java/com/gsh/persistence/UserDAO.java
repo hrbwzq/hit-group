@@ -1,5 +1,6 @@
 package com.gsh.persistence;
 
+import com.gsh.domain.Group;
 import com.gsh.domain.Topic;
 import com.gsh.domain.User;
 

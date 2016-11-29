@@ -75,6 +75,13 @@ public class User implements Serializable
 	)
 	private Set<Privilege> privileges = new HashSet<>();
 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "t_user_group",
+			joinColumns = {@JoinColumn(name = "user_id")},
+			inverseJoinColumns = {@JoinColumn(name = "group_id")}
+	)
+	private Set<Group> groups = new HashSet<>();
 
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> friendsRef = new HashSet<>();
@@ -387,6 +394,16 @@ public class User implements Serializable
 		this.notices = notices;
 	}
 
+	public Set<Group> getGroups()
+	{
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups)
+	{
+		this.groups = groups;
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -410,7 +427,20 @@ public class User implements Serializable
 		if (qq != null ? !qq.equals(user.qq) : user.qq != null) return false;
 		if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
 		if (watched != null ? !watched.equals(user.watched) : user.watched != null) return false;
-		return !(banned != null ? !banned.equals(user.banned) : user.banned != null);
+		if (banned != null ? !banned.equals(user.banned) : user.banned != null) return false;
+		if (newsReplies != null ? !newsReplies.equals(user.newsReplies) : user.newsReplies != null) return false;
+		if (privileges != null ? !privileges.equals(user.privileges) : user.privileges != null) return false;
+		if (groups != null ? !groups.equals(user.groups) : user.groups != null) return false;
+		if (friendsRef != null ? !friendsRef.equals(user.friendsRef) : user.friendsRef != null) return false;
+		if (friends != null ? !friends.equals(user.friends) : user.friends != null) return false;
+		if (watchersRef != null ? !watchersRef.equals(user.watchersRef) : user.watchersRef != null) return false;
+		if (watchers != null ? !watchers.equals(user.watchers) : user.watchers != null) return false;
+		if (sentChats != null ? !sentChats.equals(user.sentChats) : user.sentChats != null) return false;
+		if (recievedChats != null ? !recievedChats.equals(user.recievedChats) : user.recievedChats != null)
+			return false;
+		if (topics != null ? !topics.equals(user.topics) : user.topics != null) return false;
+		if (topicReplies != null ? !topicReplies.equals(user.topicReplies) : user.topicReplies != null) return false;
+		return !(notices != null ? !notices.equals(user.notices) : user.notices != null);
 
 	}
 
@@ -433,6 +463,18 @@ public class User implements Serializable
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
 		result = 31 * result + (watched != null ? watched.hashCode() : 0);
 		result = 31 * result + (banned != null ? banned.hashCode() : 0);
+		result = 31 * result + (newsReplies != null ? newsReplies.hashCode() : 0);
+		result = 31 * result + (privileges != null ? privileges.hashCode() : 0);
+		result = 31 * result + (groups != null ? groups.hashCode() : 0);
+		result = 31 * result + (friendsRef != null ? friendsRef.hashCode() : 0);
+		result = 31 * result + (friends != null ? friends.hashCode() : 0);
+		result = 31 * result + (watchersRef != null ? watchersRef.hashCode() : 0);
+		result = 31 * result + (watchers != null ? watchers.hashCode() : 0);
+		result = 31 * result + (sentChats != null ? sentChats.hashCode() : 0);
+		result = 31 * result + (recievedChats != null ? recievedChats.hashCode() : 0);
+		result = 31 * result + (topics != null ? topics.hashCode() : 0);
+		result = 31 * result + (topicReplies != null ? topicReplies.hashCode() : 0);
+		result = 31 * result + (notices != null ? notices.hashCode() : 0);
 		return result;
 	}
 }

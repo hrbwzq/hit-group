@@ -1,5 +1,6 @@
 package com.gsh.persistence.impl;
 
+import com.gsh.domain.Group;
 import com.gsh.domain.Topic;
 import com.gsh.domain.User;
 import com.gsh.persistence.UserDAO;

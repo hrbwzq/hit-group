@@ -177,4 +177,24 @@ public interface UserService
 	 */
 	public List<Privilege> getAllPrivileges(Long userId);
 
+	/**
+	 * 用户加入圈子
+	 * @param userId 用户ID
+	 * @param groupId 圈子ID
+	 */
+	public void joinGroup(Long userId, Long groupId);
+
+	/**
+	 * 用户退出圈子
+	 * @param userId 用户ID
+	 * @param groupId 圈子ID
+	 */
+	public void exitGroup(Long userId, Long groupId);
+
+	/**
+	 * 得到用户已加入的圈子
+	 * @param userId 用户ID
+	 * @return 包含已加入圈子的列表
+	 */
+	public List<Group> getJoinedGroups(Long userId);
 }

@@ -321,4 +321,38 @@ public class UserServiceImpl extends CommonService implements UserService
 		privilegeList.addAll(privilegeSet);
 		return privilegeList;
 	}
+
+	@Override
+	public void joinGroup(Long userId, Long groupId)
+	{
+		User user = this.getUserDAO().getUserById(userId);
+		Group group = this.getGroupDAO().getGroupByGroupId(groupId);
+		user.getGroups().add(group);
+		group.getUsers().add(user);
+	}
+
+	@Override
+	public void exitGroup(Long userId, Long groupId)
+	{
+		User user = this.getUserDAO().getUserById(userId);
+		Group group = this.getGroupDAO().getGroupByGroupId(groupId);
+		if(user.getGroups().contains(group))
+		{
+			user.getGroups().remove(group);
+		}
+		if(group.getUsers().contains(user))
+		{
+			group.getUsers().remove(user);
+		}
+	}
+
+	@Override
+	public List<Group> getJoinedGroups(Long userId)
+	{
+		User user = this.getUserDAO().getUserById(userId);
+		Set<Group> groupSet = user.getGroups();
+		List<Group> groupList = new ArrayList<>();
+		groupList.addAll(groupSet);
+		return groupList;
+	}
 }

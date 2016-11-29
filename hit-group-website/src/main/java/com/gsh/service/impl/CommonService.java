@@ -25,6 +25,8 @@ public class CommonService
 	private FriendApplyDAO friendApplyDAO;
 	@Autowired
 	private PrivilegeDAO privilegeDAO;
+	@Autowired
+	private GroupDAO groupDAO;
 
 	public ChatDAO getChatDAO()
 	{
@@ -69,5 +71,10 @@ public class CommonService
 	public PrivilegeDAO getPrivilegeDAO()
 	{
 		return privilegeDAO;
+	}
+
+	public GroupDAO getGroupDAO()
+	{
+		return groupDAO;
 	}
 }

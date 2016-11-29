@@ -33,6 +33,9 @@ public class Topic implements Serializable
 	@ManyToOne
 	private User user;
 
+	@ManyToOne
+	private Group group;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "topic")
 	private Set<TopicReply> topicReplies = new HashSet<>();
 
@@ -125,6 +128,16 @@ public class Topic implements Serializable
 		return this.lastModifiedTime.toString().substring(0, 19);
 	}
 
+	public Group getGroup()
+	{
+		return group;
+	}
+
+	public void setGroup(Group group)
+	{
+		this.group = group;
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -139,7 +152,10 @@ public class Topic implements Serializable
 		if (createTime != null ? !createTime.equals(topic.createTime) : topic.createTime != null) return false;
 		if (lastModifiedTime != null ? !lastModifiedTime.equals(topic.lastModifiedTime) : topic.lastModifiedTime != null)
 			return false;
-		return !(deleted != null ? !deleted.equals(topic.deleted) : topic.deleted != null);
+		if (deleted != null ? !deleted.equals(topic.deleted) : topic.deleted != null) return false;
+		if (user != null ? !user.equals(topic.user) : topic.user != null) return false;
+		if (group != null ? !group.equals(topic.group) : topic.group != null) return false;
+		return !(topicReplies != null ? !topicReplies.equals(topic.topicReplies) : topic.topicReplies != null);
 
 	}
 
@@ -152,6 +168,9 @@ public class Topic implements Serializable
 		result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
 		result = 31 * result + (lastModifiedTime != null ? lastModifiedTime.hashCode() : 0);
 		result = 31 * result + (deleted != null ? deleted.hashCode() : 0);
+		result = 31 * result + (user != null ? user.hashCode() : 0);
+		result = 31 * result + (group != null ? group.hashCode() : 0);
+		result = 31 * result + (topicReplies != null ? topicReplies.hashCode() : 0);
 		return result;
 	}
 }

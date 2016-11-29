@@ -32,4 +32,22 @@ public interface TopicDAO
 	 * @return 总条数
 	 */
 	public int queryTopicCount();
+
+	/**
+	 * 通过圈子名分页查询主题帖
+	 * @param startPage 起始页
+	 * @param pageSize 分页大小
+	 * @param groupName 圈子名字符串
+	 * @return 包含查询结果的列表，可能为空列表
+	 */
+	public List<Topic> queryTopicByPageAndGroupName(int startPage, int pageSize, String groupName);
+
+	/**
+	 * 通过圈子名分页查询主题帖
+	 * @param startPage 起始页
+	 * @param pageSize 分页大小
+	 * @param groupId 圈子ID
+	 * @return 包含查询结果的列表，可能为空列表
+	 */
+	public List<Topic> queryTopicByPageAndGroupId(int startPage, int pageSize, Long groupId);
 }
