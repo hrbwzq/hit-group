@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>我的圈子</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<div class="panel panel-default">
+		<div class="panel-heading">创建圈子</div>
+		<div class="panel-body">
+			<form class="" role="search" action="/circle/create_group" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="group_name" placeholder="创建圈子">
+				</div>
+				<button type="submit" class="btn btn-default">
+					确认
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

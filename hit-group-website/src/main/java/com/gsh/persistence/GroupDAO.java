@@ -16,4 +16,11 @@ public interface GroupDAO
 	 * @return 圈子对象
 	 */
 	public Group getGroupByGroupId(Long groupId);
+
+	/**
+	 * 通过圈子名查找圈子对象
+	 * @param groupName 圈子名
+	 * @return 圈子对象
+	 */
+	public Group getGroupByGroupName(String groupName);
 }

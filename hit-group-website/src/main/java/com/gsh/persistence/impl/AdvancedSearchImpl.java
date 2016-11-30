@@ -1,5 +1,6 @@
 package com.gsh.persistence.impl;
 
+import com.gsh.domain.Group;
 import com.gsh.domain.User;
 import com.gsh.persistence.AdvancedSearch;
 import org.hibernate.Query;
@@ -21,5 +22,16 @@ public class AdvancedSearchImpl extends CommonDAO implements AdvancedSearch
 		@SuppressWarnings("unchecked")
 		List<User> userList = query.list();
 		return userList;
+	}
+
+	@Override
+	public List<Group> groupFuzzyQuery(String pattern)
+	{
+		String hql = "from Group group where group.name like CONCAT('%', :pattern, '%')";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("pattern", pattern);
+		@SuppressWarnings("unchecked")
+		List<Group> groupList = query.list();
+		return groupList;
 	}
 }

@@ -17,7 +17,7 @@
 			<ul class="nav navbar-nav">
 				<!--主标题右侧链接组-->
 				<li><a href="#springUrl('/')">哈工大热点</a></li>
-				<li><a href="#springUrl('/forum?page=1')">讨论组</a></li>
+				<li><a href="/circle/group_list">讨论组</a></li>
 				<li><a href="/circle/friend_list">朋友圈</a></li>
 			</ul>
 			<form class="navbar-form navbar-left" role="search">
@@ -35,6 +35,7 @@
 							<li><a href="/user_page?user_id=$user.userId">个人主页</a> </li>
 							<li><a href="/message/chats">我的私信</a></li>
 							<li><a href="/message/friend_apply">好友申请</a></li>
+							<li><a href="/circle/group_list">我的圈子</a></li>
 							<li><a href="/logout">退出登陆</a></li>
 						#else
 							<li><a href="/login">登陆</a></li>

@@ -86,6 +86,7 @@ public class TopicServiceImpl extends CommonService implements TopicService
 		topic.setLastModifiedTime(new Date());
 		topic.setDeleted(0);
 		topic.setGroup(group);
+		group.getTopics().add(topic);
 
 		//保存新的主题帖对象
 		getTopicDAO().addTopic(topic);

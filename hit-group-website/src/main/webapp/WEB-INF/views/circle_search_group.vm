@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>我的圈子</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation"><a href="/circle/group_list">我的圈子</a></li>
+		<li role="presentation" class="active"><a href="/circle/search_group">查找圈子</a></li>
+	</ul>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			查找圈子
+		</div>
+		<div class="panel-body">
+			<form class="" role="search" action="/circle/search_group" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="pattern" placeholder="搜索圈子">
+				</div>
+				<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">查询结果</div>
+		<div class="panel-body">
+			<table class="table table-striped table-hover">
+				#if($group_list)
+					#foreach($result in $group_list)
+						<tr>
+							<td>${result.name}</td>
+							<td>
+								<a href="/circle/join_group?group_id=${result.groupId}" class="btn btn-default">加入</a>
+							</td>
+						</tr>
+					#end
+				#else
+					<tr>
+						无结果，创建一个圈子？ <a href="/circle/create_group" class="btn btn-default">Go</a>
+					</tr>
+				#end
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

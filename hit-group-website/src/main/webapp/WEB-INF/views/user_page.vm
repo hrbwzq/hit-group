@@ -55,7 +55,7 @@
 									#elseif($selected_user.sex == "female")
 										女
 									#elseif($selected_user.sex == "lovely")
-										(′▽`〃)可爱的男孩子
+										(′▽`〃)
 									#elseif($selected_user.sex == "secret")
 										(╯°Д°)╯︵ ┻━┻ TA不想告诉你
 									#else

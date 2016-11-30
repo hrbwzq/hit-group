@@ -1,5 +1,6 @@
 package com.gsh.persistence;
 
+import com.gsh.domain.Group;
 import com.gsh.domain.User;
 
 import java.util.List;
@@ -13,4 +14,10 @@ public interface AdvancedSearch
 	 */
 	public List<User> userFuzzyQuery(String pattern);
 
+	/**
+	 * 圈子名模糊查询
+	 * @param pattern 匹配字符串
+	 * @return 包含查询结果的列表
+	 */
+	public List<Group> groupFuzzyQuery(String pattern);
 }

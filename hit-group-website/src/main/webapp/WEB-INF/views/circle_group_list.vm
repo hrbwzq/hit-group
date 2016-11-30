@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>我的圈子</title>
+	<link href="/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/resources/css/global_style.css" rel="stylesheet" type="text/css"/>
+	<script src="/resources/js/jquery-2.1.4.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+</head>
+<body>
+	#parse("nav.vm")
+	#nav()
+<div class="container" style="padding-top: 70px">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="/circle/group_list">我的圈子</a></li>
+		<li role="presentation"><a href="/circle/search_group">查找圈子</a></li>
+	</ul>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			圈子列表
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped table-hover">
+				#foreach($group in $group_list)
+					<tr>
+						<td>$group.name</td>
+						<td>
+							<a href="/forum?page=1&group_id=${group.groupId}" class="btn btn-default">进入</a>
+							<a href="/circle/exit_group?group_id=${group.groupId}" class="btn btn-default">退出</a>
+						</td>
+					</tr>
+				#end
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

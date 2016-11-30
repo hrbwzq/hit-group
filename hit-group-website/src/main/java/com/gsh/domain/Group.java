@@ -63,28 +63,4 @@ public class Group implements Serializable
 		this.users = users;
 	}
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Group group = (Group) o;
-
-		if (groupId != null ? !groupId.equals(group.groupId) : group.groupId != null) return false;
-		if (name != null ? !name.equals(group.name) : group.name != null) return false;
-		if (topics != null ? !topics.equals(group.topics) : group.topics != null) return false;
-		return !(users != null ? !users.equals(group.users) : group.users != null);
-
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = groupId != null ? groupId.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (topics != null ? topics.hashCode() : 0);
-		result = 31 * result + (users != null ? users.hashCode() : 0);
-		return result;
-	}
 }

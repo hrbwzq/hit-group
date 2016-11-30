@@ -22,4 +22,12 @@ public class GroupDAOImpl extends CommonDAO implements GroupDAO
 		query.setLong("groupId", groupId);
 		return (Group)query.uniqueResult();
 	}
+
+	@Override
+	public Group getGroupByGroupName(String groupName)
+	{
+		Query query = this.getSession().createQuery("from Group group where group.name=:name");
+		query.setString("name", groupName);
+		return (Group)query.uniqueResult();
+	}
 }

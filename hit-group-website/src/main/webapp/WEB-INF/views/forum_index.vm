@@ -27,7 +27,9 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel panel-heading">
-					最新帖子
+					${group.name}圈子的最新帖子
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="/circle/exit_group?group_id=${group.groupId}" class="btn btn-default">退出圈子</a>
 				</div>
 				<div class="panel-body">
 					<ul class="list-group">
@@ -42,8 +44,8 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="btn-group">
-						<a href="/forum?page=$topicPageBean.previousPage" class="btn btn-default">上一页</a>
-						<a href="/forum?page=$topicPageBean.nextPage" class="btn btn-default">下一页</a>
+						<a href="/forum?page=${topicPageBean.previousPage}&group_id=${group.groupId}" class="btn btn-default">上一页</a>
+						<a href="/forum?page=${topicPageBean.nextPage}&group_id=${group.groupId}" class="btn btn-default">下一页</a>
 					</div>
 				</div>
 			</div>
@@ -52,7 +54,7 @@
 					发表新的主题
 				</div>
 				<div class="panel-body">
-					<form role="form" action="" method="post" onsubmit="return check();" id="topic_form">
+					<form role="form" action="/forum?group_id=${group.groupId}" method="post" onsubmit="return check();" id="topic_form">
 						<input type="text" class="sr-only" name="pageNum" value="$pageNum" />
 						<div class="form-group">
 							#springBind("topicFormBean.title")

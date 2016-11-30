@@ -115,10 +115,10 @@ create table t_topic
 	last_modified_time datetime NOT NULL,
 	deleted int NOT NULL,
 	user_user_id bigint NOT NULL,
-	group_id bigint NOT NULL,
+	group_group_id bigint NOT NULL,
 	PRIMARY KEY(topic_id),
 	CONSTRAINT t_topic_user_user_id_fk FOREIGN KEY(user_user_id) REFERENCES t_user(user_id),
-	CONSTRAINT t_topic_group_group_id_fk FOREIGN KEY (group_id) REFERENCES t_group(group_id)
+	CONSTRAINT t_topic_group_group_id_fk FOREIGN KEY (group_group_id) REFERENCES t_group(group_id)
 );
 create table t_topic_reply
 (
