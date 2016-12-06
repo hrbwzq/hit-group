@@ -1,4 +1,4 @@
-package com.gaoshuhang.service;
+﻿package com.gaoshuhang.service;
 
 import com.gaoshuhang.domain.News;
 import com.gaoshuhang.globals.LogVars;
@@ -45,6 +45,7 @@ public class Crawler
 	{
 		String userAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0";
 
+
 		//抓取列表文档
 		Connection listConnection = Jsoup.connect(baseURL);
 		Document document = listConnection
@@ -87,7 +88,7 @@ public class Crawler
 					img.attr("src", "http://today.hit.edu.cn" + originSrc);
 				}
 
-				String content = textDiv.html();
+				String content = textDiv.html();//正文
 
 				News news = new News(title, content, this.category);
 				this.newsList.add(news);

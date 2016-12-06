@@ -1,4 +1,4 @@
-package com.gaoshuhang.controller;
+﻿package com.gaoshuhang.controller;
 
 import com.gaoshuhang.globals.POSTVars;
 import com.gaoshuhang.globals.URLVars;
@@ -32,7 +32,7 @@ public class GlobalController
 			crawlerProperties.load(GlobalController.class.getClassLoader().getResourceAsStream("baseUrl.properties"));
 			postProperties.load(GlobalController.class.getClassLoader().getResourceAsStream("post.properties"));
 		}
-		catch (IOException e)
+		catch (IOException e)//处理异常
 		{
 			throw new RuntimeException("读取URL配置文件出错");
 		}

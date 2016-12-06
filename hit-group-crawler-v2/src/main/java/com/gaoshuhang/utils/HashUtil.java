@@ -1,4 +1,4 @@
-package com.gaoshuhang.utils;
+﻿package com.gaoshuhang.utils;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class HashUtil
 {
-	public static String strHash(String value, String method)
+	public static String strHash(String value, String method)//hash
 	{
 		try
 		{

@@ -1,4 +1,4 @@
-package com.gaoshuhang.controller;
+﻿package com.gaoshuhang.controller;
 
 import com.gaoshuhang.dao.FetchLogDAO;
 import com.gaoshuhang.domain.News;
@@ -26,7 +26,7 @@ public class FilterController
 	 */
 	public void doFilter()
 	{
-		LogVars.GLOBAL_LOGGER.info("开始数据库操作");
+		LogVars.GLOBAL_LOGGER.info("开始数据库操作");//开始操作
 		List<News> filteredList = new ArrayList<>();
 
 		for(News news : this.newsList)

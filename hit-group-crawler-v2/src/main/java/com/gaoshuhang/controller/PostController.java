@@ -1,4 +1,4 @@
-package com.gaoshuhang.controller;
+﻿package com.gaoshuhang.controller;
 
 import com.gaoshuhang.domain.News;
 import com.gaoshuhang.globals.LogVars;
@@ -20,7 +20,7 @@ public class PostController
 		this.newsList = newsList;
 	}
 
-	public void doPost()
+	public void doPost()//post操作发送数据
 	{
 		LogVars.GLOBAL_LOGGER.info("开始发送数据");
 		try
