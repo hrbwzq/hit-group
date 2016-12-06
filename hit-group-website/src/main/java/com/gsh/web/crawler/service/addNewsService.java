@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -20,6 +21,7 @@ public class addNewsService
 	@Autowired
 	private CrawlerService crawlerService;
 
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, value = "/crawler/add_news")
 	public void addNews(@RequestParam("auid") String auid,
 	                    @RequestParam("pwd") String pwd,

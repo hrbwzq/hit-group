@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated
 public class NewCrawl {
 //  public LinkedList ImgUrls=new LinkedList();//用于存放图片URL
 //  public LinkedList linkurls=new LinkedList();//用于存放url链接

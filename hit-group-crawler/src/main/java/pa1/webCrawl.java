@@ -20,6 +20,7 @@ import org.jsoup.select.Elements;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated
 public class webCrawl {
 
 	String news_url = "http://today.hit.edu.cn/classList/2.html";
